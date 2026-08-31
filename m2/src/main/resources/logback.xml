@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <property name="LOG_DIR" value="./logs" />
-    <property name="LOG_FILE" value="module1" />
+    <property name="LOG_FILE" value="module2" />
     <property name="HTTP_LOG_FILE" value="http-wire.log" />
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -40,11 +40,11 @@
         <appender-ref ref="FILE"/>
     </logger>
 
-    <root level="INFO">
-        <appender-ref ref="STDOUT"/>
-    </root>
-
     <logger name="http.wire" level="INFO" additivity="false">
         <appender-ref ref="HTTP_FILE"/>
     </logger>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
 </configuration>
