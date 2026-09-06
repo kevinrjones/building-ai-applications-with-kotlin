@@ -72,4 +72,21 @@ object PromptTemplates {
             """.trimIndent()
         )
     }
+
+    val review = PromptTemplate { input ->
+        RenderedPrompt(
+            systemPrompt = """
+                You are a Kotlin code reviewer. 
+                Return ONLY valid JSON 
+            """.trimIndent(),
+            userPrompt = """
+                ${input["correction"].orEmpty()}
+                Please review the following Kotlin code:
+                <code>
+                ${input["code"].orEmpty()}
+                </code>
+            """.trimIndent()
+        )
+    }
+
 }

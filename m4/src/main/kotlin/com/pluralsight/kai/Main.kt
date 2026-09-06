@@ -24,6 +24,7 @@ fun main(args: Array<String>) {
         wireLogger.info(message)
     }.apply {
         level = HttpLoggingInterceptor.Level.BODY
+        redactHeader("Authorization")
     }
 
     val httpClient = OkHttpClient.Builder()

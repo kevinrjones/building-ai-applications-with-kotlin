@@ -18,6 +18,15 @@ enum class FinishReason {
     @SerialName("content_filter") CONTENT_FILTER
 }
 
+@Serializable
+enum class ResponseFormatType {
+    @SerialName("json_object") JSON_OBJECT
+}
+
+@Serializable
+data class ResponseFormatDto(val type: ResponseFormatType = ResponseFormatType.JSON_OBJECT)
+
+
 
 @Serializable
 data class MessageDto(
@@ -30,7 +39,8 @@ data class MessageDto(
 data class ChatCompletionRequestDto(
     val model: String,
     val messages: List<MessageDto>,
-    val temperature: Double = 1.0
+    val temperature: Double = 1.0,
+    @SerialName("response_format") val responseFormat: ResponseFormatDto? = null,
 )
 
 @Serializable

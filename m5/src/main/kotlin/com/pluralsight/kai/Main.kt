@@ -3,16 +3,17 @@ package com.pluralsight.kai
 import com.github.ajalt.clikt.core.main
 import com.github.ajalt.clikt.core.subcommands
 import com.pluralsight.kai.ai.OpenAiCompatibleClient
+import com.pluralsight.kai.cli.ReviewCommand
 import com.pluralsight.kai.cli.AskCommand
 import com.pluralsight.kai.cli.ClassifyCommand
 import com.pluralsight.kai.cli.RewriteCommand
 import com.pluralsight.kai.cli.RootCommand
 import com.pluralsight.kai.cli.SummarizeCommand
 import com.pluralsight.kai.config.AppConfig
-import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.slf4j.LoggerFactory
+import java.util.concurrent.TimeUnit
 
 fun main(args: Array<String>) {
 
@@ -24,9 +25,14 @@ fun main(args: Array<String>) {
         wireLogger.info(message)
     }.apply {
         level = HttpLoggingInterceptor.Level.BODY
+        redactHeader("Authorization")
     }
 
     val httpClient = OkHttpClient.Builder()
+        .connectTimeout(60, TimeUnit.SECONDS)
+        .readTimeout(60, TimeUnit.SECONDS)
+        .writeTimeout(60, TimeUnit.SECONDS)
+        .callTimeout(60, TimeUnit.SECONDS)
         .addInterceptor(loggingInterceptor)
         .build()
 
@@ -38,6 +44,7 @@ fun main(args: Array<String>) {
             SummarizeCommand(client),
             RewriteCommand(client),
             ClassifyCommand(client),
+            ReviewCommand(client),
             )
         .main(args)
 }
