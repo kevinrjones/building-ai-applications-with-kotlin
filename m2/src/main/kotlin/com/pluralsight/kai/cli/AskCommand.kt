@@ -28,6 +28,7 @@ class AskCommand : CliktCommand("ask") {
             wireLogger.info(message)
         }.apply {
             level = HttpLoggingInterceptor.Level.BODY
+            redactHeader("Authorization")
         }
 
 

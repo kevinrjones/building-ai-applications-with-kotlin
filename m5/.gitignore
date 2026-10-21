@@ -5,6 +5,7 @@ build/
 !**/src/test/**/build/
 
 ### IntelliJ IDEA ###
+.idea/
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
@@ -43,3 +44,9 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Logs ###
+logs/
+*.log
+*.log.gz
+*.log.*
